@@ -7,7 +7,15 @@
         <img src="/uploads/@Model.Image.FileName" style="width: 900px;" />
         <br />
         <br />
-        <button id="like-button" class="btn btn-primary btn-lg">LIKE</button>
+        @if (Model.DisableLike == true)
+        {
+            <button id="like-button" class="btn btn-primary btn-lg" disabled>LIKE</button>
+        }
+        else
+        {
+            <button id="like-button" class="btn btn-primary btn-lg">LIKE</button>
+        }
+
         Current Likes: <span id="likes-count">@Model.Image.Likes</span>
     </div>
 </div>

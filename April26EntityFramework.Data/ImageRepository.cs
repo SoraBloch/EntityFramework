@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,8 +34,11 @@ namespace April26EntityFramework.Data
         public void LikeImage(int id)
         {
             using var context = new ImageDbContext(_connectionString);
-            var image = context.Images.FirstOrDefault(d => d.Id == id);
-            image.Likes += 1;
+            var image = GetImageById(id);
+            image.Likes++;
+            context.Images.Attach(image);
+            context.Entry(image).State = EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }
